@@ -21,6 +21,8 @@ const setupInput = function(conn) {
       conn.write('Move: down');
     } else if (key === '\u0064') {
       conn.write('Move: right');
+    } else if (key === '\u0068') {
+      conn.write('Say: Hello');
     }
   });
   return stdin;
