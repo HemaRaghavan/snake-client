@@ -1,5 +1,7 @@
 // Stores the active TCP connection object.
 let connection;
+const { IP, PORT, movements } = require('./constants');
+const keys = Object.keys(movements);
 /**
  * Setup User Interface 
  * Specifically, so that we can handle user input via stdin
@@ -13,16 +15,11 @@ const setupInput = function(conn) {
   stdin.on('data', handleUserInput = (key) => {
     if (key === '\u0003') {
       process.exit();
-    } else if (key === '\u0077') {
-      conn.write('Move: up');
-    } else if (key === '\u0061') {
-      conn.write('Move: left');
-    } else if (key === '\u0073') {
-      conn.write('Move: down');
-    } else if (key === '\u0064') {
-      conn.write('Move: right');
-    } else if (key === '\u0068') {
-      conn.write('Say: Hello');
+    } 
+    for (let newKey of keys) {
+      if (key === newKey) {
+        conn.write(movements[key]);
+      }
     }
   });
   return stdin;
